@@ -5,6 +5,7 @@ import com.itosoftware.entities.Usuarios;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -24,15 +25,34 @@ public class ManagedBeanLogin {
     }
 
     public void verificarExistenciaUsuario() {
-        Usuarios usuario = new Usuarios();
-        Usuarios usuarioResponse = new Usuarios();
-        usuario.setId(id);
-        usuarioResponse = usuariosFacade.find(id);
-        if (usuarioResponse.getContrasena().equals(contrasena))  {
-            System.out.println("Contraseña no corresponde");
-        }else {
-            System.out.println("Cliente existe");
+        try {
+            Usuarios usuario = new Usuarios();
+            Usuarios usuarioResponse = new Usuarios();
+            usuario.setId(id);
+            usuarioResponse = usuariosFacade.find(id);
+            if (usuarioResponse.getContrasena().equals(contrasena)) {
+                mostrarMensaje();
+            } else {
+                mostrarMensajeClienteNoExiste();
+            }
+        } catch (Exception e) {
+            mostrarMensajeError();
         }
+    }
+
+    private void mostrarMensaje() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('dlg').show()");
+    }
+
+    private void mostrarMensajeClienteNoExiste() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('clienteNoExiste').show()");
+    }
+
+    private void mostrarMensajeError() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('error').show()");
     }
 
     public Integer getId() {

@@ -40,7 +40,13 @@
                 <p:outputLabel value="Usuario" />
                 <p:inputText value="#{beanRegMercancia.usuarioRegistroId}"  maxlength="11" required="true" />
             </h:panelGrid>
-            <p:commandButton actionListener="#{beanRegMercancia.crearMercancia()}" update="idform" value="CREAR MERCANCIA" />
+            <p:commandButton actionListener="#{beanRegMercancia.crearMercancia()}" update="@form" value="CREAR MERCANCIA" />
+            <p:dialog header="Mercancía" widgetVar="dlg" minHeight="40" modal="true">
+                <h:outputText value="Mercancía creada exitosamente" />
+            </p:dialog>
+            <p:dialog header="Mercancía" widgetVar="error" minHeight="40" modal="true">
+                <h:outputText value="Error al momento de grabar la mercancía" />
+            </p:dialog>
             <h:form id="idformData">
                 <p:dataTable value="#{beanListaMercancia.mercancias}" var="mercancia" >
                     <p:column headerText="Nombre" >

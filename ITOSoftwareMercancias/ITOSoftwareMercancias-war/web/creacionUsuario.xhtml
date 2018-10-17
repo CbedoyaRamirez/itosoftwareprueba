@@ -30,7 +30,14 @@
                 <p:outputLabel value="Tipo de usuario" />
                 <p:inputText value="#{beanUsuario.tipoUsuario}" required="true" />
             </h:panelGrid>
-            <p:commandButton actionListener="#{beanUsuario.crearUsuario()}" update="idform" value="CREAR USUARIO" />
+            <p:commandButton actionListener="#{beanUsuario.crearUsuario()}" 
+                             update="@form" value="CREAR USUARIO" />
+            <p:dialog header="Creación de usuario" widgetVar="dlg" minHeight="40" modal="true">
+                <h:outputText value="Usuario creado exitosamente" />
+            </p:dialog>
+            <p:dialog header="Dialog" widgetVar="error" minHeight="40" modal="true">
+                <h:outputText value="Error al momento de grabar el usuario" />
+            </p:dialog>
         </h:form>        
     </h:body>
 </html>

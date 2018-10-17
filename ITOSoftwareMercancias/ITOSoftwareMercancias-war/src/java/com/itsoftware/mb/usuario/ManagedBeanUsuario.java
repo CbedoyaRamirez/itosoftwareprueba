@@ -4,8 +4,9 @@ import com.itosoftware.beans.UsuariosFacadeLocal;
 import com.itosoftware.entities.Usuarios;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedBean;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -26,16 +27,32 @@ public class ManagedBeanUsuario {
     private UsuariosFacadeLocal usuarioFacade;
 
     public void crearUsuario() {
-        Usuarios usuario = new Usuarios();
-        usuario.setId(id);
-        usuario.setContrasena(contrasena);
-        usuario.setPerfilId(tipoUsuario);
-        usuario.setPersonaId(numeroID);
-        usuario.setUsuario(nombres + " " + apellidos);
-        usuarioFacade.create(usuario);
+        try {
+            Usuarios usuario = new Usuarios();
+            usuario.setId(id);
+            usuario.setContrasena(contrasena);
+            usuario.setPerfilId(tipoUsuario);
+            usuario.setPersonaId(numeroID);
+            usuario.setUsuario(nombres + " " + apellidos);
+            usuarioFacade.create(usuario);
+            mostrarMensaje();
+        } catch (Exception e) {
+            mostrarMensajeError();
+        }
+
     }
 
     public ManagedBeanUsuario() {
+    }
+
+    private void mostrarMensaje() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('dlg').show()");
+    }
+
+    private void mostrarMensajeError() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('error').show()");
     }
 
     public void enviarForm() {

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -17,7 +18,7 @@ public class ManagedBeanRegMercancia {
 
     @EJB
     private MercanciasFacadeLocal mercanciaFacade;
-    
+
     private Integer id;
     private String nombreProducto;
     private String ciudadDestino;
@@ -26,23 +27,38 @@ public class ManagedBeanRegMercancia {
     private Integer precio;
     private String estadoEnvio;
     private Integer destinatarioId;
-    private Integer usuarioRegistroId;   
-    
+    private Integer usuarioRegistroId;
+
     public ManagedBeanRegMercancia() {
     }
-    
-    public void crearMercancia(){
-        Mercancias mercancia =  new Mercancias();
-        mercancia.setCiudadDestino(ciudadDestino);
-        mercancia.setDestinatarioId(destinatarioId);
-        mercancia.setDireccion(direccion);
-        mercancia.setEstadoEnvio(estadoEnvio);
-        mercancia.setFechaSalida(fechaSalida); // este campo es de tipo TIME en la base de datos entregada, por ese motivo no escribe la fecha
-        mercancia.setId(id);
-        mercancia.setNombreProducto(nombreProducto);
-        mercancia.setPrecio(precio);
-        mercancia.setUsuarioRegistroId(usuarioRegistroId);
-        mercanciaFacade.create(mercancia);
+
+    public void crearMercancia() {
+        try{
+            Mercancias mercancia = new Mercancias();
+            mercancia.setCiudadDestino(ciudadDestino);
+            mercancia.setDestinatarioId(destinatarioId);
+            mercancia.setDireccion(direccion);
+            mercancia.setEstadoEnvio(estadoEnvio);
+            mercancia.setFechaSalida(fechaSalida); // este campo es de tipo TIME en la base de datos entregada, por ese motivo no escribe la fecha
+            mercancia.setId(id);
+            mercancia.setNombreProducto(nombreProducto);
+            mercancia.setPrecio(precio);
+            mercancia.setUsuarioRegistroId(usuarioRegistroId);
+            mercanciaFacade.create(mercancia);
+            mostrarMensaje();
+        }catch(Exception e){
+            mostrarMensajeError();
+        }
+    }
+
+    private void mostrarMensaje() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('dlg').show()");
+    }
+
+    private void mostrarMensajeError() {
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('error').show()");
     }
 
     public Integer getId() {
@@ -116,7 +132,5 @@ public class ManagedBeanRegMercancia {
     public void setUsuarioRegistroId(Integer usuarioRegistroId) {
         this.usuarioRegistroId = usuarioRegistroId;
     }
-    
-    
-    
+
 }

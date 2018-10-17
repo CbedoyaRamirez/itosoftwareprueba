@@ -23,6 +23,15 @@
                 <p:inputText value="#{beanLogin.contrasena}" maxlength="20" required="true" type="password" />
             </h:panelGrid>
             <p:commandButton actionListener="#{beanLogin.verificarExistenciaUsuario()}" update="idform" value="INGRESAR" />
+            <p:dialog header="Usuario" widgetVar="clienteNoExiste" minHeight="40" modal="true">
+                <h:outputText value="Usuario no existe" />
+            </p:dialog>
+            <p:dialog header="Usuario" widgetVar="dlg" minHeight="40" modal="true">
+                <h:outputText value="Usuario existe" />
+            </p:dialog>
+            <p:dialog header="Usuario" widgetVar="error" minHeight="40" modal="true">
+                <h:outputText value="Ocurrio un error" />
+            </p:dialog>
         </h:form>        
     </h:body>
 </html>
