@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="idform" >
+            <p:growl id="messages" />
+            <p:menubar >
+                <p:menuitem value="Crear Usuario" url="faces/creacionUsuario.xhtml"  />
+                <p:menuitem value="Ingresar Usuario" url="faces/login.xhtml" />
+                <p:menuitem value="Registro Mercancia" url="faces/registroMercancia.xhtml" />
+                <p:menuitem value="Listado Mercancia" url="faces/listaMercancias.xhtml" />
+            </p:menubar>
+            <p:spacer />
+            <h:panelGrid columns="2" >
+                <p:outputLabel value="id" />
+                <p:inputText value="#{beanRegMercancia.id}" maxlength="11" required="true" validatorMessage="Se requiere el id" />
+                <p:outputLabel value="Nombre del producto" />
+                <p:inputText value="#{beanRegMercancia.nombreProducto}" maxlength="20" required="true"/>
+                <p:outputLabel value="Ciudad destino" />
+                <p:inputText value="#{beanRegMercancia.ciudadDestino}" maxlength="20" required="true" />
+                <p:outputLabel value="Direccion" />
+                <p:inputText value="#{beanRegMercancia.direccion}" maxlength="20" required="true" />
+                <p:outputLabel value="Fecha salida" />
+                <p:calendar value="#{beanRegMercancia.fechaSalida}" required="true"  />
+                <p:outputLabel value="Precio" />
+                <p:inputText value="#{beanRegMercancia.precio}" maxlength="11" required="true" />
+                <p:outputLabel value="Estado" />
+                <p:inputText value="#{beanRegMercancia.estadoEnvio}" maxlength="20" required="true" />
+                <p:outputLabel value="Destinatario" />
+                <p:inputText value="#{beanRegMercancia.destinatarioId}" maxlength="11" required="true" />
+                <p:outputLabel value="Usuario" />
+                <p:inputText value="#{beanRegMercancia.usuarioRegistroId}"  maxlength="11" required="true" />
+                <p:commandButton actionListener="#{beanRegMercancia.crearMercancia()}" update="idform" value="CREAR MERCANCIA" />
+            </h:panelGrid>
+        </h:form>        
+    </h:body>
+</html>
+
