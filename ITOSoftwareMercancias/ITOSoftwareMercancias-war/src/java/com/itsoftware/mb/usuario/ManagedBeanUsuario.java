@@ -23,7 +23,7 @@ public class ManagedBeanUsuario {
     Integer tipoUsuario;
 
     @EJB
-    private UsuariosFacadeLocal usuariosFacade;
+    private UsuariosFacadeLocal usuarioFacade;
 
     public void crearUsuario() {
         Usuarios usuario = new Usuarios();
@@ -32,7 +32,7 @@ public class ManagedBeanUsuario {
         usuario.setPerfilId(tipoUsuario);
         usuario.setPersonaId(numeroID);
         usuario.setUsuario(nombres + " " + apellidos);
-        usuariosFacade.create(usuario);
+        usuarioFacade.create(usuario);
     }
 
     public ManagedBeanUsuario() {

@@ -31,7 +31,7 @@ public class ManagedBeanLogin {
         if (usuarioResponse.getContrasena().equals(contrasena))  {
             System.out.println("Contraseña no corresponde");
         }else {
-            
+            System.out.println("Cliente existe");
         }
     }
 

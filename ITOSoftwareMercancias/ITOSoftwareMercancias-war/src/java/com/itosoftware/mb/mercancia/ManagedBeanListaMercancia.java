@@ -16,13 +16,13 @@ import javax.faces.bean.ManagedBean;
 public class ManagedBeanListaMercancia {
 
     @EJB
-    private MercanciasFacadeLocal mercanciasFacade;
+    private MercanciasFacadeLocal mercanciaFacade;
     
     public ManagedBeanListaMercancia() {
     }
     
     public List<Mercancias> getMercancias(){
-        return mercanciasFacade.findAll();
+        return mercanciaFacade.findAll();
     }
     
 }

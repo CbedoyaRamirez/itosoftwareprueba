@@ -16,7 +16,7 @@ import javax.faces.bean.ManagedBean;
 public class ManagedBeanRegMercancia {
 
     @EJB
-    private MercanciasFacadeLocal mercanciasFacade;
+    private MercanciasFacadeLocal mercanciaFacade;
     
     private Integer id;
     private String nombreProducto;
@@ -37,12 +37,12 @@ public class ManagedBeanRegMercancia {
         mercancia.setDestinatarioId(destinatarioId);
         mercancia.setDireccion(direccion);
         mercancia.setEstadoEnvio(estadoEnvio);
-        mercancia.setFechaSalida(fechaSalida); // este campo es de tipo TIME en la base de datos entregada por ese motivo no escribe la fecha
+        mercancia.setFechaSalida(fechaSalida); // este campo es de tipo TIME en la base de datos entregada, por ese motivo no escribe la fecha
         mercancia.setId(id);
         mercancia.setNombreProducto(nombreProducto);
         mercancia.setPrecio(precio);
         mercancia.setUsuarioRegistroId(usuarioRegistroId);
-        mercanciasFacade.create(mercancia);
+        mercanciaFacade.create(mercancia);
     }
 
     public Integer getId() {
